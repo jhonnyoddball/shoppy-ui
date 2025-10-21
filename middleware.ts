@@ -1,6 +1,6 @@
 import { NextRequest } from "next/server";
-import authenticated from "./app/auth/authenticated";
 import { unauthorizedRoutes } from "./app/common/constants/routes";
+import authenticated from "./app/auth/actions/authenticated";
 
 export function middleware(request: NextRequest) {
   if(!authenticated() && !unauthorizedRoutes.some(route => request.nextUrl.pathname.startsWith(route.path))) {
