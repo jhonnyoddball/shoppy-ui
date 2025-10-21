@@ -7,7 +7,7 @@ import { redirect } from "next/navigation";
 export default async function createUser(
   _prevState: FormResponse,
   formData: FormData
-) {
+): Promise<FormResponse> {
   const email = formData.get("email")?.toString() ?? "";
   const password = formData.get("password")?.toString() ?? "";
 
@@ -17,7 +17,7 @@ export default async function createUser(
   const { error } = await post("users", formData);
   if (error) {
     console.error("Error creating user:", error);
-    return;
+    return { error };
   }
 
   redirect('/auth/login');
